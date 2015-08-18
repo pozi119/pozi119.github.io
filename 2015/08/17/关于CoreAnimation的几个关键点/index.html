@@ -28,7 +28,7 @@
 
 
 
-  <meta name="keywords" content="其他," />
+  <meta name="keywords" content="CoreAnimation,Objective-C," />
 
 
 
@@ -37,22 +37,28 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="本来没有写Blog的习惯,但是工作,生活中总会遇到各种事和问题,想把它们记录下来.
-  之前在csdn上写了几篇,都是一些简单问题.过几天转过来.
-  提供博客功能的网站,内容太杂,各种广告.还是喜欢简洁清晰的风格,在github上使用hexo建静态博客.主题选择了next,它的帮助文档比较清晰,编辑配置文件比较方便,风格也符合个人审美.">
+<meta name="description" content="之前写一个分段选择控件: VOSegmentedControl, 暂时总结了几点1 . 在CAAnimation中对CALayer的frame进行的任何操作都无效
+
+可以对CALayer的bounds进行操作,改变bounds只会改变CALayer的显示大小,但不会改变其位置.
+要改变位置必须对position进行操作,不过请注意锚点anchorPoint.
+时间线: 可以设置Animation的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello,hexo">
-<meta property="og:url" content="http://yoursite.com/2015/08/17/Hello-hexo/index.html">
+<meta property="og:title" content="关于CoreAnimation的几个关键点">
+<meta property="og:url" content="http://yoursite.com/2015/08/17/关于CoreAnimation的几个关键点/index.html">
 <meta property="og:site_name" content="Valo's Blog">
-<meta property="og:description" content="本来没有写Blog的习惯,但是工作,生活中总会遇到各种事和问题,想把它们记录下来.
-  之前在csdn上写了几篇,都是一些简单问题.过几天转过来.
-  提供博客功能的网站,内容太杂,各种广告.还是喜欢简洁清晰的风格,在github上使用hexo建静态博客.主题选择了next,它的帮助文档比较清晰,编辑配置文件比较方便,风格也符合个人审美.">
-<meta property="og:updated_time" content="2015-08-17T15:25:40.000Z">
+<meta property="og:description" content="之前写一个分段选择控件: VOSegmentedControl, 暂时总结了几点1 . 在CAAnimation中对CALayer的frame进行的任何操作都无效
+
+可以对CALayer的bounds进行操作,改变bounds只会改变CALayer的显示大小,但不会改变其位置.
+要改变位置必须对position进行操作,不过请注意锚点anchorPoint.
+时间线: 可以设置Animation的">
+<meta property="og:updated_time" content="2015-08-18T01:31:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello,hexo">
-<meta name="twitter:description" content="本来没有写Blog的习惯,但是工作,生活中总会遇到各种事和问题,想把它们记录下来.
-  之前在csdn上写了几篇,都是一些简单问题.过几天转过来.
-  提供博客功能的网站,内容太杂,各种广告.还是喜欢简洁清晰的风格,在github上使用hexo建静态博客.主题选择了next,它的帮助文档比较清晰,编辑配置文件比较方便,风格也符合个人审美.">
+<meta name="twitter:title" content="关于CoreAnimation的几个关键点">
+<meta name="twitter:description" content="之前写一个分段选择控件: VOSegmentedControl, 暂时总结了几点1 . 在CAAnimation中对CALayer的frame进行的任何操作都无效
+
+可以对CALayer的bounds进行操作,改变bounds只会改变CALayer的显示大小,但不会改变其位置.
+要改变位置必须对position进行操作,不过请注意锚点anchorPoint.
+时间线: 可以设置Animation的">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -62,7 +68,7 @@
   };
 </script>
 
-  <title> Hello,hexo | Valo's Blog </title>
+  <title> 关于CoreAnimation的几个关键点 | Valo's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -171,7 +177,7 @@
           
           
             
-              Hello,hexo
+              关于CoreAnimation的几个关键点
             
           
         </h1>
@@ -190,8 +196,8 @@
             &nbsp; | &nbsp; 分类于
             
               <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/其他/" itemprop="url" rel="index">
-                  <span itemprop="name">其他</span>
+                <a href="/categories/旧博客/" itemprop="url" rel="index">
+                  <span itemprop="name">旧博客</span>
                 </a>
               </span>
 
@@ -206,8 +212,8 @@
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2015/08/17/Hello-hexo/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/17/Hello-hexo/" itemprop="commentsCount"></span>
+              <a href="/2015/08/17/关于CoreAnimation的几个关键点/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/17/关于CoreAnimation的几个关键点/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -221,9 +227,12 @@
       
 
       
-        <span itemprop="articleBody"><p>  本来没有写Blog的习惯,但是工作,生活中总会遇到各种事和问题,想把它们记录下来.</p>
-<p>  之前在csdn上写了几篇,都是一些简单问题.过几天转过来.</p>
-<p>  提供博客功能的网站,内容太杂,各种广告.还是喜欢简洁清晰的风格,在github上使用<a href="https://hexo.io/zh-cn/" title="hexo" target="_blank" rel="external">hexo</a>建静态博客.主题选择了<a href="http://theme-next.iissnan.com/" title="next" target="_blank" rel="external">next</a>,它的帮助文档比较清晰,编辑配置文件比较方便,风格也符合个人审美.</p>
+        <span itemprop="articleBody"><p>之前写一个分段选择控件: <a href="https://github.com/pozi119/VOSegmentedControlDemo" title="VOSegmentedControl" target="_blank" rel="external">VOSegmentedControl</a>, 暂时总结了几点<br>1 . 在CAAnimation中对CALayer的frame进行的任何操作都无效</p>
+<ol>
+<li>可以对CALayer的bounds进行操作,改变bounds只会改变CALayer的显示大小,但不会改变其位置.</li>
+<li>要改变位置必须对position进行操作,不过请注意锚点anchorPoint.</li>
+<li>时间线: 可以设置Animation的beginTime和duration, 让多个不同的动画连贯起来.</li>
+</ol>
 </span>
       
     </div>
@@ -232,7 +241,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/其他/" rel="tag">#其他</a>
+            <a href="/tags/CoreAnimation-Objective-C/" rel="tag">#CoreAnimation,Objective-C</a>
           
         </div>
       
@@ -241,11 +250,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/08/17/使用NSInputStream逐行处理大文件/" rel="prev">使用NSInputStream逐行处理大文件</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/17/使用NSInputStream逐行处理大文件/" rel="next">使用NSInputStream逐行处理大文件</a>
             
           </div>
         </div>
@@ -297,8 +306,8 @@
         
           <div class="comments" id="comments">
             
-              <div class="ds-thread" data-thread-key="2015/08/17/Hello-hexo/"
-                   data-title="Hello,hexo" data-url="http://yoursite.com/2015/08/17/Hello-hexo/">
+              <div class="ds-thread" data-thread-key="2015/08/17/关于CoreAnimation的几个关键点/"
+                   data-title="关于CoreAnimation的几个关键点" data-url="http://yoursite.com/2015/08/17/关于CoreAnimation的几个关键点/">
               </div>
             
           </div>

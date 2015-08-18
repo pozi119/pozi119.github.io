@@ -28,7 +28,7 @@
 
 
 
-  <meta name="keywords" content="Valo,pozi119" />
+  <meta name="keywords" content="CoreAnimation,Objective-C," />
 
 
 
@@ -37,15 +37,22 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="Valo&apos;s Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Valo's Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="最近在使用FMDB处理SQL文件时,内存消耗过大,以至于在iPhone4s(iOS7.1)上APP直接闪退.具体原因是因为处理SQL文件是一开始用的NSArray.总共十万条左右的数据,结果内存消耗超过1G…..改用NSInputStream逐行处理后, 内存消耗降至247M左右, 处理完成后将FMDB queue置为nil,内存消耗降至150M左右 ,恢复一个正常值.
+
+逐行处理大文件的方法如下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用NSInputStream逐行处理大文件">
+<meta property="og:url" content="http://yoursite.com/2015/08/17/使用NSInputStream逐行处理大文件/index.html">
 <meta property="og:site_name" content="Valo's Blog">
-<meta property="og:description" content="Valo&apos;s Blog">
+<meta property="og:description" content="最近在使用FMDB处理SQL文件时,内存消耗过大,以至于在iPhone4s(iOS7.1)上APP直接闪退.具体原因是因为处理SQL文件是一开始用的NSArray.总共十万条左右的数据,结果内存消耗超过1G…..改用NSInputStream逐行处理后, 内存消耗降至247M左右, 处理完成后将FMDB queue置为nil,内存消耗降至150M左右 ,恢复一个正常值.
+
+逐行处理大文件的方法如下">
+<meta property="og:updated_time" content="2015-08-18T01:32:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Valo's Blog">
-<meta name="twitter:description" content="Valo&apos;s Blog">
+<meta name="twitter:title" content="使用NSInputStream逐行处理大文件">
+<meta name="twitter:description" content="最近在使用FMDB处理SQL文件时,内存消耗过大,以至于在iPhone4s(iOS7.1)上APP直接闪退.具体原因是因为处理SQL文件是一开始用的NSArray.总共十万条左右的数据,结果内存消耗超过1G…..改用NSInputStream逐行处理后, 内存消耗降至247M左右, 处理完成后将FMDB queue置为nil,内存消耗降至150M左右 ,恢复一个正常值.
+
+逐行处理大文件的方法如下">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -55,7 +62,7 @@
   };
 </script>
 
-  <title> Valo's Blog </title>
+  <title> 使用NSInputStream逐行处理大文件 | Valo's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -83,9 +90,7 @@
 
 
 
-  <div class="container one-column 
-   page-home 
-">
+  <div class="container one-column page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -153,9 +158,9 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div id="content" class="content"> 
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
@@ -166,98 +171,7 @@
           
           
             
-              <a class="post-title-link" href="/2015/08/17/关于CoreAnimation的几个关键点/" itemprop="url">
-                关于CoreAnimation的几个关键点
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-08-17T22:36:06+08:00" content="2015-08-17">
-            2015-08-17
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/旧博客/" itemprop="url" rel="index">
-                  <span itemprop="name">旧博客</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2015/08/17/关于CoreAnimation的几个关键点/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/17/关于CoreAnimation的几个关键点/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p>之前写一个分段选择控件: <a href="https://github.com/pozi119/VOSegmentedControlDemo" title="VOSegmentedControl" target="_blank" rel="external">VOSegmentedControl</a>, 暂时总结了几点<br>1 . 在CAAnimation中对CALayer的frame进行的任何操作都无效</p>
-<ol>
-<li>可以对CALayer的bounds进行操作,改变bounds只会改变CALayer的显示大小,但不会改变其位置.</li>
-<li>要改变位置必须对position进行操作,不过请注意锚点anchorPoint.</li>
-<li>时间线: 可以设置Animation的beginTime和duration, 让多个不同的动画连贯起来.</li>
-</ol>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/08/17/使用NSInputStream逐行处理大文件/" itemprop="url">
-                使用NSInputStream逐行处理大文件
-              </a>
+              使用NSInputStream逐行处理大文件
             
           
         </h1>
@@ -307,8 +221,7 @@
       
 
       
-        
-          <span itemprop="articleBody"><p>最近在使用FMDB处理SQL文件时,内存消耗过大,以至于在iPhone4s(iOS7.1)上APP直接闪退.<br>具体原因是因为处理SQL文件是一开始用的NSArray.总共十万条左右的数据,结果内存消耗超过1G…..<br>改用NSInputStream逐行处理后, 内存消耗降至247M左右, 处理完成后将FMDB queue置为nil,内存消耗降至150M左右 ,恢复一个正常值.</p>
+        <span itemprop="articleBody"><p>最近在使用FMDB处理SQL文件时,内存消耗过大,以至于在iPhone4s(iOS7.1)上APP直接闪退.<br>具体原因是因为处理SQL文件是一开始用的NSArray.总共十万条左右的数据,结果内存消耗超过1G…..<br>改用NSInputStream逐行处理后, 内存消耗降至247M左右, 处理完成后将FMDB queue置为nil,内存消耗降至150M左右 ,恢复一个正常值.</p>
 <ol>
 <li><p>逐行处理大文件的方法如下:<br> /**</p>
 <ul>
@@ -400,117 +313,85 @@ self.writeQueue = nil;
 </code></pre></li>
 </ol>
 </span>
-        
       
     </div>
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/CoreAnimation-Objective-C/" rel="tag">#CoreAnimation,Objective-C</a>
+          
+        </div>
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/08/17/关于CoreAnimation的几个关键点/" rel="prev">关于CoreAnimation的几个关键点</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/17/Hello-hexo/" rel="next">Hello,hexo</a>
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </article>
 
 
-    
+
+    <div class="post-spread">
       
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/08/17/Hello-hexo/" itemprop="url">
-                Hello,hexo
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-08-17T22:36:06+08:00" content="2015-08-17">
-            2015-08-17
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/其他/" itemprop="url" rel="index">
-                  <span itemprop="name">其他</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2015/08/17/Hello-hexo/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/17/Hello-hexo/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p>  本来没有写Blog的习惯,但是工作,生活中总会遇到各种事和问题,想把它们记录下来.</p>
-<p>  之前在csdn上写了几篇,都是一些简单问题.过几天转过来.</p>
-<p>  提供博客功能的网站,内容太杂,各种广告.还是喜欢简洁清晰的风格,在github上使用<a href="https://hexo.io/zh-cn/" title="hexo" target="_blank" rel="external">hexo</a>建静态博客.主题选择了<a href="http://theme-next.iissnan.com/" title="next" target="_blank" rel="external">next</a>,它的帮助文档比较清晰,编辑配置文件比较方便,风格也符合个人审美.</p>
-</span>
-        
       
     </div>
+  </div>
 
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
  </div>
 
         
+            <!-- 多说热评文章-->
+            <p>热评文章</p>
+            <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+        
 
+        
+          <div class="comments" id="comments">
+            
+              <div class="ds-thread" data-thread-key="2015/08/17/使用NSInputStream逐行处理大文件/"
+                   data-title="使用NSInputStream逐行处理大文件" data-url="http://yoursite.com/2015/08/17/使用NSInputStream逐行处理大文件/">
+              </div>
+            
+          </div>
         
       </div>
 
@@ -527,6 +408,15 @@ self.writeQueue = nil;
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-inner">
 
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
       
 
       <section class="site-overview">
@@ -586,6 +476,17 @@ self.writeQueue = nil;
 
       </section>
 
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
       
 
     </div>
@@ -673,6 +574,165 @@ self.writeQueue = nil;
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
   
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
 
   <script type="text/javascript">
     $(document).ready(function () {
