@@ -37,28 +37,31 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="之前写一个分段选择控件: VOSegmentedControl, 暂时总结了几点1 . 在CAAnimation中对CALayer的frame进行的任何操作都无效
+<meta name="description" content="之前写一个分段选择控件: VOSegmentedControl, 暂时总结了几点
 
+在CAAnimation中对CALayer的frame进行的任何操作都无效
 可以对CALayer的bounds进行操作,改变bounds只会改变CALayer的显示大小,但不会改变其位置.
 要改变位置必须对position进行操作,不过请注意锚点anchorPoint.
-时间线: 可以设置Animation的">
+时间线: 可以设置Animation的beg">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于CoreAnimation的几个关键点">
 <meta property="og:url" content="http://yoursite.com/2015/08/17/关于CoreAnimation的几个关键点/index.html">
 <meta property="og:site_name" content="Valo's Blog">
-<meta property="og:description" content="之前写一个分段选择控件: VOSegmentedControl, 暂时总结了几点1 . 在CAAnimation中对CALayer的frame进行的任何操作都无效
+<meta property="og:description" content="之前写一个分段选择控件: VOSegmentedControl, 暂时总结了几点
 
+在CAAnimation中对CALayer的frame进行的任何操作都无效
 可以对CALayer的bounds进行操作,改变bounds只会改变CALayer的显示大小,但不会改变其位置.
 要改变位置必须对position进行操作,不过请注意锚点anchorPoint.
-时间线: 可以设置Animation的">
-<meta property="og:updated_time" content="2015-08-18T01:31:51.000Z">
+时间线: 可以设置Animation的beg">
+<meta property="og:updated_time" content="2015-08-18T02:35:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于CoreAnimation的几个关键点">
-<meta name="twitter:description" content="之前写一个分段选择控件: VOSegmentedControl, 暂时总结了几点1 . 在CAAnimation中对CALayer的frame进行的任何操作都无效
+<meta name="twitter:description" content="之前写一个分段选择控件: VOSegmentedControl, 暂时总结了几点
 
+在CAAnimation中对CALayer的frame进行的任何操作都无效
 可以对CALayer的bounds进行操作,改变bounds只会改变CALayer的显示大小,但不会改变其位置.
 要改变位置必须对position进行操作,不过请注意锚点anchorPoint.
-时间线: 可以设置Animation的">
+时间线: 可以设置Animation的beg">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -227,8 +230,9 @@
       
 
       
-        <span itemprop="articleBody"><p>之前写一个分段选择控件: <a href="https://github.com/pozi119/VOSegmentedControlDemo" title="VOSegmentedControl" target="_blank" rel="external">VOSegmentedControl</a>, 暂时总结了几点<br>1 . 在CAAnimation中对CALayer的frame进行的任何操作都无效</p>
+        <span itemprop="articleBody"><p>之前写一个分段选择控件: <a href="https://github.com/pozi119/VOSegmentedControlDemo" title="VOSegmentedControl" target="_blank" rel="external">VOSegmentedControl</a>, 暂时总结了几点</p>
 <ol>
+<li>在CAAnimation中对CALayer的frame进行的任何操作都无效</li>
 <li>可以对CALayer的bounds进行操作,改变bounds只会改变CALayer的显示大小,但不会改变其位置.</li>
 <li>要改变位置必须对position进行操作,不过请注意锚点anchorPoint.</li>
 <li>时间线: 可以设置Animation的beginTime和duration, 让多个不同的动画连贯起来.</li>

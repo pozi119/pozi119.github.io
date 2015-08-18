@@ -219,8 +219,9 @@
 
       
         
-          <span itemprop="articleBody"><p>之前写一个分段选择控件: <a href="https://github.com/pozi119/VOSegmentedControlDemo" title="VOSegmentedControl" target="_blank" rel="external">VOSegmentedControl</a>, 暂时总结了几点<br>1 . 在CAAnimation中对CALayer的frame进行的任何操作都无效</p>
+          <span itemprop="articleBody"><p>之前写一个分段选择控件: <a href="https://github.com/pozi119/VOSegmentedControlDemo" title="VOSegmentedControl" target="_blank" rel="external">VOSegmentedControl</a>, 暂时总结了几点</p>
 <ol>
+<li>在CAAnimation中对CALayer的frame进行的任何操作都无效</li>
 <li>可以对CALayer的bounds进行操作,改变bounds只会改变CALayer的显示大小,但不会改变其位置.</li>
 <li>要改变位置必须对position进行操作,不过请注意锚点anchorPoint.</li>
 <li>时间线: 可以设置Animation的beginTime和duration, 让多个不同的动画连贯起来.</li>
