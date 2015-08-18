@@ -310,7 +310,7 @@
         
           <span itemprop="articleBody"><p>最近在使用FMDB处理SQL文件时,内存消耗过大,以至于在iPhone4s(iOS7.1)上APP直接闪退.<br>具体原因是因为处理SQL文件是一开始用的NSArray.总共十万条左右的数据,结果内存消耗超过1G…..<br>改用NSInputStream逐行处理后, 内存消耗降至247M左右, 处理完成后将FMDB queue置为nil,内存消耗降至150M左右 ,恢复一个正常值.</p>
 <ol>
-<li><p>逐行处理大文件的方法如下:<br> /**</p>
+<li><p>逐行处理大文件的方法如下:<br>`    /**</p>
 <ul>
 <li>逐行处理大文件<br>*</li>
 <li>@param filePath        本地文件路径</li>
@@ -371,13 +371,11 @@ if (component) {
 }
 </code></pre><p>}<br>[inputStream close];<br>if (completion) {</p>
 <pre><code>completion<span class="list">(<span class="keyword">lineNumber</span>)</span><span class="comment">;</span>
-</code></pre><p>}<br>}</p>
+</code></pre><p>}<br>}<br>`</p>
 </li>
 </ul>
 </li>
-<li><p>FMDB queue处理数据的语句<br>//对数据库进行操作</p>
-<pre><code>[self.writeQueue <span class="string">inTransaction:</span>^(FMDatabase *db, BOOL *rollback) {
-    <span class="keyword">for</span> (NSString *tbl <span class="keyword">in</span> argsArray) {
+<li>FMDB queue处理数据的语句<br>//对数据库进行操作<br>`        [self.writeQueue inTransaction:^(FMDatabase <em>db, BOOL </em>rollback) {<pre><code>    <span class="keyword">for</span> (NSString *tbl <span class="keyword">in</span> argsArray) {
         NSString *dropTableSql = [NSString <span class="string">stringWithFormat:</span> @<span class="string">"DELETE FROM %@"</span>, tbl];
         [db <span class="string">executeUpdate:</span> dropTableSql];
     }
@@ -393,7 +391,7 @@ if (component) {
 <span class="comment">// 关闭数据库后设置为nil,以便释放内存</span>
 [self.writeQueue close];
 self.writeQueue = nil;
-</code></pre></li>
+</code></pre>`    </li>
 </ol>
 </span>
         
