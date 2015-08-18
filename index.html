@@ -311,89 +311,100 @@
           <span itemprop="articleBody"><p>最近在使用FMDB处理SQL文件时,内存消耗过大,以至于在iPhone4s(iOS7.1)上APP直接闪退.<br>具体原因是因为处理SQL文件是一开始用的NSArray.总共十万条左右的数据,结果内存消耗超过1G…..<br>改用NSInputStream逐行处理后, 内存消耗降至247M左右, 处理完成后将FMDB queue置为nil,内存消耗降至150M左右 ,恢复一个正常值.</p>
 <ol>
 <li><p>逐行处理大文件的方法如下:</p>
-<p> /**</p>
-<ul>
-<li>逐行处理大文件<br>*</li>
-<li>@param filePath        本地文件路径</li>
-<li>@param delimiterString 分隔字符串</li>
-<li>@param process         处理每一行数据的block</li>
-<li><p>@param completion      处理完成之后的block<br>*/</p>
-<ul>
-<li>(void)enumerateLinesOfFile:(NSString *)filePath<pre><code>withDelimiter:<span class="params">(NSString *)</span>delimiterString
-      process:<span class="params">(void <span class="params">(^)</span><span class="params">(NSInteger, NSString *)</span>)</span>process
-   completion:<span class="params">(void <span class="params">(^)</span><span class="params">(NSInteger)</span>)</span>completion{
-</code></pre>NSUInteger lineNumber       = 0;<br>NSMutableData <em>dataChunk    = nil;<br>NSData </em>delimiter           = [delimiterString dataUsingEncoding:GB2312_ENCODING];<br>NSInputStream *inputStream  = [[NSInputStream alloc] initWithFileAtPath:filePath];<br>[inputStream open];</li>
-</ul>
-<p>while (YES){</p>
-<pre><code><span class="built_in">NSMutableData</span> *buffer = [[<span class="built_in">NSMutableData</span> alloc] initWithLength:<span class="number">4</span> * <span class="number">1024</span>];
-<span class="built_in">NSInteger</span> length     = [inputStream read:[buffer mutableBytes] maxLength:[buffer length]];
-<span class="keyword">if</span> (length &lt;= <span class="number">0</span>) {
-    <span class="keyword">break</span>;
-}
-<span class="keyword">if</span> (dataChunk) {
-    [dataChunk appendData:buffer];
-}
-<span class="keyword">else</span>{
-    dataChunk = [buffer mutableCopy];
-}
-<span class="keyword">if</span> (dataChunk<span class="variable">.length</span> &gt; <span class="number">0</span>) {
-    <span class="comment">// 数据的当前位置</span>
-    <span class="built_in">NSUInteger</span> location = <span class="number">0</span>;
-    <span class="keyword">while</span> (<span class="literal">YES</span>) {
-        <span class="comment">// 使用分隔符分隔一行</span>
-        <span class="built_in">NSRange</span> rangeOfDelimiter = [dataChunk rangeOfData:delimiter
-                                                  options:<span class="number">0</span>
-                                                    range:<span class="built_in">NSMakeRange</span>(location, dataChunk<span class="variable">.length</span> - location)];
-        <span class="keyword">if</span> (rangeOfDelimiter<span class="variable">.length</span> == <span class="number">0</span>) {
+<pre><code><span class="comment">/**
+ *  逐行处理大文件
+ *
+ *  @param filePath        本地文件路径
+ *  @param delimiterString 分隔字符串
+ *  @param process         处理每一行数据的block
+ *  @param completion      处理完成之后的block
+ */</span>
++ (<span class="keyword">void</span>)enumerateLinesOfFile:(<span class="built_in">NSString</span> *)filePath
+               withDelimiter:(<span class="built_in">NSString</span> *)delimiterString
+                     process:(<span class="keyword">void</span> (^)(<span class="built_in">NSInteger</span>, <span class="built_in">NSString</span> *))process
+                  completion:(<span class="keyword">void</span> (^)(<span class="built_in">NSInteger</span>))completion{
+    <span class="built_in">NSUInteger</span> lineNumber       = <span class="number">0</span>;
+    <span class="built_in">NSMutableData</span> *dataChunk    = <span class="literal">nil</span>;
+    <span class="built_in">NSData</span> *delimiter           = [delimiterString dataUsingEncoding:GB2312_ENCODING];
+    <span class="built_in">NSInputStream</span> *inputStream  = [[<span class="built_in">NSInputStream</span> alloc] initWithFileAtPath:filePath];
+    [inputStream open];
+
+    <span class="keyword">while</span> (<span class="literal">YES</span>){
+        <span class="built_in">NSMutableData</span> *buffer = [[<span class="built_in">NSMutableData</span> alloc] initWithLength:<span class="number">4</span> * <span class="number">1024</span>];
+        <span class="built_in">NSInteger</span> length     = [inputStream read:[buffer mutableBytes] maxLength:[buffer length]];
+        <span class="keyword">if</span> (length &lt;= <span class="number">0</span>) {
             <span class="keyword">break</span>;
         }
-        <span class="built_in">NSRange</span> rangeOfNewLine = <span class="built_in">NSMakeRange</span>(location, rangeOfDelimiter<span class="variable">.location</span> - location + delimiter<span class="variable">.length</span>);
-        <span class="comment">//取得数据</span>
-        <span class="built_in">NSData</span> *everyComponent = [dataChunk subdataWithRange:rangeOfNewLine];
-        <span class="built_in">NSString</span> *component = [[<span class="built_in">NSString</span> alloc] initWithData:everyComponent encoding:GB2312_ENCODING];
-        <span class="comment">// 处理数据</span>
+        <span class="keyword">if</span> (dataChunk) {
+            [dataChunk appendData:buffer];
+        }
+        <span class="keyword">else</span>{
+            dataChunk = [buffer mutableCopy];
+        }
+        <span class="keyword">if</span> (dataChunk<span class="variable">.length</span> &gt; <span class="number">0</span>) {
+            <span class="comment">// 数据的当前位置</span>
+            <span class="built_in">NSUInteger</span> location = <span class="number">0</span>;
+            <span class="keyword">while</span> (<span class="literal">YES</span>) {
+                <span class="comment">// 使用分隔符分隔一行</span>
+                <span class="built_in">NSRange</span> rangeOfDelimiter = [dataChunk rangeOfData:delimiter
+                                                          options:<span class="number">0</span>
+                                                            range:<span class="built_in">NSMakeRange</span>(location, dataChunk<span class="variable">.length</span> - location)];
+                <span class="keyword">if</span> (rangeOfDelimiter<span class="variable">.length</span> == <span class="number">0</span>) {
+                    <span class="keyword">break</span>;
+                }
+                <span class="built_in">NSRange</span> rangeOfNewLine = <span class="built_in">NSMakeRange</span>(location, rangeOfDelimiter<span class="variable">.location</span> - location + delimiter<span class="variable">.length</span>);
+                <span class="comment">//取得数据</span>
+                <span class="built_in">NSData</span> *everyComponent = [dataChunk subdataWithRange:rangeOfNewLine];
+                <span class="built_in">NSString</span> *component = [[<span class="built_in">NSString</span> alloc] initWithData:everyComponent encoding:GB2312_ENCODING];
+                <span class="comment">// 处理数据</span>
+                <span class="keyword">if</span> (component) {
+                    lineNumber ++;
+                    process(lineNumber, component);
+                }
+                <span class="comment">// 标记当前位置</span>
+                location = <span class="built_in">NSMaxRange</span>(rangeOfNewLine);
+            }
+            <span class="keyword">if</span> (location &lt; dataChunk<span class="variable">.length</span>) {
+                <span class="built_in">NSData</span> *reminder = [dataChunk subdataWithRange:<span class="built_in">NSMakeRange</span>(location, dataChunk<span class="variable">.length</span> - location)];
+                dataChunk = [reminder mutableCopy];
+            }
+        }
+    }
+    <span class="keyword">if</span> (dataChunk<span class="variable">.length</span> &gt; <span class="number">0</span>) {
+        <span class="built_in">NSString</span> *component = [[<span class="built_in">NSString</span> alloc] initWithData:dataChunk encoding:GB2312_ENCODING];
         <span class="keyword">if</span> (component) {
             lineNumber ++;
             process(lineNumber, component);
         }
-        <span class="comment">// 标记当前位置</span>
-        location = <span class="built_in">NSMaxRange</span>(rangeOfNewLine);
     }
-    <span class="keyword">if</span> (location &lt; dataChunk<span class="variable">.length</span>) {
-        <span class="built_in">NSData</span> *reminder = [dataChunk subdataWithRange:<span class="built_in">NSMakeRange</span>(location, dataChunk<span class="variable">.length</span> - location)];
-        dataChunk = [reminder mutableCopy];
+    [inputStream close];
+    <span class="keyword">if</span> (completion) {
+        completion(lineNumber);
     }
 }
-</code></pre><p>}<br>if (dataChunk.length &gt; 0) {</p>
-<pre><code>NSString *component = [[NSString alloc] initWithData:dataChunk encoding:GB2312_ENCODING]<span class="comment">;</span>
-if (component) {
-    lineNumber ++<span class="comment">;</span>
-    process(lineNumber, component)<span class="comment">;</span>
-}
-</code></pre><p>}<br>[inputStream close];<br>if (completion) {</p>
-<pre><code>completion<span class="list">(<span class="keyword">lineNumber</span>)</span><span class="comment">;</span>
-</code></pre><p>}<br>}</p>
-</li>
-</ul>
-</li>
+</code></pre></li>
 </ol>
 <ol>
 <li><p>FMDB queue处理数据的语句</p>
-<p> //对数据库进行操作<br> [self.writeQueue inTransaction:^(FMDatabase <em>db, BOOL </em>rollback) {</p>
-<pre><code><span class="keyword">for</span> (NSString *tbl <span class="keyword">in</span> argsArray) {
-    NSString *dropTableSql = [NSString <span class="string">stringWithFormat:</span> @<span class="string">"DELETE FROM %@"</span>, tbl];
-    [db <span class="string">executeUpdate:</span> dropTableSql];
-}
-<span class="comment">//  执行 SQL 语句</span>
-[XXFileReader <span class="string">enumerateLinesOfFile:</span>sqlFilePath <span class="string">withDelimiter:</span>@<span class="string">"\n"</span> <span class="string">process:</span>^(NSInteger lineNumber, NSString *line) {
-    NSString *sqlLine = [line <span class="string">stringByReplacingOccurrencesOfString:</span>@<span class="string">";"</span> <span class="string">withString:</span>@<span class="string">""</span>];
-    sqlLine = [sqlLine <span class="string">stringByReplacingOccurrencesOfString:</span>@<span class="string">"\r"</span> <span class="string">withString:</span>@<span class="string">""</span>];
-    <span class="keyword">if</span> (!([sqlLine <span class="string">isEqualToString:</span>@<span class="string">""</span>] || [sqlLine <span class="string">isEqualToString:</span>@<span class="string">"\n"</span>])) {
-        [db <span class="string">executeUpdate:</span>sqlLine];
+<pre><code><span class="comment">//对数据库进行操作</span>
+[self.writeQueue <span class="string">inTransaction:</span>^(FMDatabase *db, BOOL *rollback) {
+    <span class="keyword">for</span> (NSString *tbl <span class="keyword">in</span> argsArray) {
+        NSString *dropTableSql = [NSString <span class="string">stringWithFormat:</span> @<span class="string">"DELETE FROM %@"</span>, tbl];
+        [db <span class="string">executeUpdate:</span> dropTableSql];
     }
-} <span class="string">completion:</span>nil];
-</code></pre><p> }];<br> // 关闭数据库后设置为nil,以便释放内存<br> [self.writeQueue close];<br> self.writeQueue = nil;</p>
-</li>
+    <span class="comment">//  执行 SQL 语句</span>
+    [XXFileReader <span class="string">enumerateLinesOfFile:</span>sqlFilePath <span class="string">withDelimiter:</span>@<span class="string">"\n"</span> <span class="string">process:</span>^(NSInteger lineNumber, NSString *line) {
+        NSString *sqlLine = [line <span class="string">stringByReplacingOccurrencesOfString:</span>@<span class="string">";"</span> <span class="string">withString:</span>@<span class="string">""</span>];
+        sqlLine = [sqlLine <span class="string">stringByReplacingOccurrencesOfString:</span>@<span class="string">"\r"</span> <span class="string">withString:</span>@<span class="string">""</span>];
+        <span class="keyword">if</span> (!([sqlLine <span class="string">isEqualToString:</span>@<span class="string">""</span>] || [sqlLine <span class="string">isEqualToString:</span>@<span class="string">"\n"</span>])) {
+            [db <span class="string">executeUpdate:</span>sqlLine];
+        }
+    } <span class="string">completion:</span>nil];
+}];
+<span class="comment">// 关闭数据库后设置为nil,以便释放内存</span>
+[self.writeQueue close];
+self.writeQueue = nil;
+</code></pre></li>
 </ol>
 </span>
         
