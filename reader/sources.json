@@ -1,0 +1,457 @@
+[
+    {
+        "name": "起点中文",
+        "url": "https://www.qidian.com",
+        "icon": "https://qdfepccdn.qidian.com/www.qidian.com/favicon/qd_icon.ico",
+        "group": "正版",
+        "fetch":
+        {
+            "type": 0,
+            "url": "https://www.qidian.com/soushu/{{key}}.html"
+        },
+        "ruleSearch":
+        {
+            "list": "#result-list > div > ul > li.res-book-item",
+            "name": "div.book-mid-info > h2 > a[data-eid='qd_S05']@innerText",
+            "cover": "div.book-img-box > a > img@src",
+            "url": "div.book-img-box > a@href",
+            "intro": "div.book-mid-info > p.intro@text",
+            "author": "div.book-mid-info > p.author > a.name@text",
+            "tocUrl": "div.book-img-box > a@href",
+            "kind": "div.book-mid-info > p.author > a[data-eid='qd_S07'@text",
+            "words": "div.book-right-info > div > p:nth-child(1) > span@text",
+            "lastChapter": "div.book-mid-info > p.update > a[data-eid='qd_S08']@text"
+        },
+        "ruleBookInfo":
+        {
+            "name": "meta[property='og:title']@content",
+            "cover": "meta[property='og:image']@content",
+            "url": "meta[property='og:url']@content",
+            "intro": "meta[property='og:description']@content",
+            "author": "meta[property='og:novel:author']@content",
+            "tocUrl": "meta[property='og:novel:read_url']@content",
+            "kind": "a[data-eid='qd_G10']@text",
+            "words": "div.book-info > p:nth-child(4) > em:nth-child(1)@innerText",
+            "lastChapter": "meta[property='og:novel:latest_chapter_name']@content"
+        },
+        "ruleToc":
+        {
+            "list": ".volume > .cf > li",
+            "title": "h2.book_name > a@text",
+            "url": "h2.book_name > a@href"
+        },
+        "ruleContent":
+        {
+            "content": "div.read-content@innerText",
+            "updateAt": "span.j_updateTime@innerText",
+            "words": "span.j_chapterWordCut@innerText",
+            "tocUrl": ".chapter-control > a[data-eid='qd_R108']@href"
+        },
+        "enabled": true
+    },
+    {
+        "name": "番茄小说网",
+        "url": "https://fanqienovel.com",
+        "icon": "https://p1-tt.byteimg.com/origin/novel-static/a3621391ca2e537045168afda6722ee9",
+        "fetch":
+        {
+            "type": 1,
+            "url": "https://fanqienovel.com/api/author/search/search_book/v1?filter=127,127,127&page_count=10&page_index=0&query_type=0&query_word={{key}}"
+        },
+        "ruleSearch":
+        {
+            "list": "data.search_book_data_list",
+            "name": "book_name",
+            "cover": "thumb_uri@https://p1-tt.byteimg.com/img/{{key}}~240x312.jpg",
+            "url": "book_id@https://fanqienovel.com/page/{{key}}?enter_from=search",
+            "intro": "book_abstract",
+            "author": "author",
+            "tocUrl": "book_id@https://fanqienovel.com/page/{{key}}?enter_from=search",
+            "kind": "category",
+            "words": "word_count",
+            "lastChapter": "last_chapter_title"
+        },
+        "ruleBookInfo":
+        {
+            "name": "div.info-name@innerText",
+            "cover": "img.book-cover-img@src",
+            "url": "",
+            "intro": "div.page-abstract-content@innerText",
+            "author": "span.author-name-text@innerText",
+            "tocUrl": "",
+            "kind": "span.info-label-grey@innerText",
+            "words": "div.info-count-word@textContent",
+            "lastChapter": "span.info-last-title@innerText"
+        },
+        "ruleToc":
+        {
+            "list": "div.chapter-item",
+            "title": "chapter-item-title@innerText",
+            "url": "chapter-item-title@href"
+        },
+        "ruleContent":
+        {
+            "content": "div.muye-reader-content@innerText",
+            "updateAt": "div.muye-reader-desc > span:nth-child(4)@innerText",
+            "words": "div.muye-reader-desc > span:nth-child(3)@innerText",
+            "tocUrl": ""
+        },
+        "enabled": true
+    },
+    {
+        "name": "和图书",
+        "url": "https://hetushu.com",
+        "icon": "https://hetushu.com/favicon.ico",
+        "fetch":
+        {
+            "type": 0,
+            "url": "https://hetushu.com/book/search.php?wdse={{key}}"
+        },
+        "ruleSearch":
+        {
+            "list": "",
+            "name": "",
+            "cover": "",
+            "url": "",
+            "intro": "",
+            "author": "",
+            "tocUrl": "",
+            "kind": "",
+            "words": "",
+            "lastChapter": ""
+        },
+        "ruleBookInfo":
+        {
+            "name": "div.book_info > h2@innerText",
+            "cover": "div.book_info > img@src",
+            "url": "",
+            "intro": "div.book_info > div.intro@innerText",
+            "author": "div.book_info > div:nth-child(3) > a@innerText",
+            "tocUrl": "",
+            "kind": "div.book_info > div:nth-child(4)@innerText",
+            "words": "div.book_info > div:nth-child(5)@innerText",
+            "lastChapter": ""
+        },
+        "ruleToc":
+        {
+            "list": "#dir > dd",
+            "title": "a@innerText",
+            "url": "a@href"
+        },
+        "ruleContent":
+        {
+            "content": "#content@innerText",
+            "updateAt": "",
+            "words": "",
+            "tocUrl": ""
+        },
+        "enabled": false
+    },
+    {
+        "name": "香书小说",
+        "url": "https://www.ibiquge.la/",
+        "icon": "https://www.ibiquge.la/favicon.ico",
+        "fetch":
+        {
+            "type": 0,
+            "headers":
+            {
+                "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
+            },
+            "url": "https://www.ibiquge.la/modules/article/waps.php?searchkey={{key}}"
+        },
+        "ruleSearch":
+        {
+            "list": "#checkform > table > tbody > tr",
+            "name": "td:nth-child(1) > a@innerText",
+            "cover": "",
+            "url": "td:nth-child(1) > a@href",
+            "intro": "",
+            "author": "td:nth-child(3)@innerText",
+            "tocUrl": "",
+            "kind": "",
+            "words": "",
+            "lastChapter": "td:nth-child(2)@innerText"
+        },
+        "ruleBookInfo":
+        {
+            "name": "meta[property='og:novel:book_name']@content",
+            "cover": "meta[property='og:image']@content",
+            "url": "meta[property='og:novel:read_url']@content",
+            "intro": "meta[property='og:description']@content",
+            "author": "meta[property='og:novel:author']@content",
+            "tocUrl": "meta[property='og:novel:read_url']@content",
+            "kind": "meta[property='og:novel:category']@content",
+            "words": "",
+            "lastChapter": "#info > p:nth-child(5) > a@innerText"
+        },
+        "ruleToc":
+        {
+            "list": "#list > dl > dd",
+            "title": "a@innerText",
+            "url": "a@href"
+        },
+        "ruleContent":
+        {
+            "content": "#content@innerText",
+            "updateAt": "",
+            "words": "",
+            "tocUrl": "div.content_read > div > div.bookname > div.bottem1 > a:nth-child(3)@href"
+        },
+        "enabled": true
+    },
+    {
+        "name": "武林中文网",
+        "url": "https://www.zw50.com",
+        "icon": "https://www.zw50.com/favicon.ico",
+        "fetch":
+        {
+            "type": 0,
+            "headers":
+            {
+                "Content-Type": "application/x-www-form-urlencoded; charset=gbk"
+            },
+            "url": "https://www.zw50.com/modules/article/search.php?searchkey={{key}}&submit=%CB%D1%CB%F7"
+        },
+        "ruleSearch":
+        {
+            "list": "table.grid > tbody > tr",
+            "name": "td:nth-child(1) > a@innerText",
+            "cover": "",
+            "url": "td:nth-child(1) > a@href",
+            "intro": "",
+            "author": "td:nth-child(3)@innerText",
+            "tocUrl": "td:nth-child(1) > a@href@index_{{page}}.html",
+            "kind": "",
+            "words": "td:nth-child(4)@innerText",
+            "lastChapter": "td:nth-child(2)@innerText"
+        },
+        "ruleBookInfo":
+        {
+            "name": "meta[property='og:novel:book_name']@content",
+            "cover": "meta[property='og:image']@content",
+            "url": "meta[property='og:novel:read_url']@content",
+            "intro": "meta[property='og:description']@content",
+            "author": "meta[property='og:novel:author']@content",
+            "tocUrl": "meta[property='og:novel:read_url']@content@index_{{page}}.html",
+            "kind": "meta[property='og:novel:category']@content",
+            "words": "",
+            "lastChapter": "meta[property='og:novel:latest_chapter_name']@content"
+        },
+        "ruleToc":
+        {
+            "list": "dl.zjlist > dd",
+            "title": "a@innerText",
+            "url": "a@href"
+        },
+        "ruleContent":
+        {
+            "content": "div#content@innerText",
+            "updateAt": "",
+            "words": "",
+            "tocUrl": "a#link-index@href"
+        },
+        "enabled": true
+    },
+    {
+        "name": "书趣阁",
+        "url": "https://www.ishuquge.com",
+        "icon": "https://www.ishuquge.com/favicon.ico",
+        "fetch":
+        {
+            "type": 0,
+            "method": "POST",
+            "body": "s=0000000000000000000&searchkey={{key}}",
+            "url": "https://www.ishuquge.org/search.php"
+        },
+        "ruleSearch":
+        {
+            "list": "div.bookcase > div.bookbox",
+            "name": "div.bookinfo > h4.bookname > a@innerText",
+            "cover": "",
+            "url": "div.bookinfo > h4.bookname > a@href",
+            "intro": "",
+            "author": "div.bookinfo > div.author@innerText",
+            "tocUrl": "",
+            "kind": "div.bookinfo > div.cat@innerText",
+            "words": "",
+            "lastChapter": "div.bookinfo > div.update@innerText"
+        },
+        "ruleBookInfo":
+        {
+            "name": "meta[property='og:novel:book_name']@content",
+            "cover": "meta[property='og:image']@content",
+            "url": "meta[property='og:novel:read_url']@content",
+            "intro": "meta[property='og:description']@content",
+            "author": "meta[property='og:novel:author']@content",
+            "tocUrl": "meta[property='og:novel:read_url']@content",
+            "kind": "meta[property='og:novel:category']@content",
+            "words": "div.info > div.small > span:nth-child(4)@innerText",
+            "lastChapter": "meta[property='og:novel:latest_chapter_name']@content"
+        },
+        "ruleToc":
+        {
+            "list": "div.listmain > dl > dd",
+            "title": "a@innerText",
+            "url": "a@href"
+        },
+        "ruleContent":
+        {
+            "content": "div#content@innerText",
+            "updateAt": "",
+            "words": "",
+            "tocUrl": "div.page_chapter > ul > li:nth-child(2) > a@href"
+        },
+        "enabled": true
+    },
+    {
+        "name": "采墨阁",
+        "url": "https://www.caimoge.com",
+        "icon": "https://www.caimoge.com/favicon.ico",
+        "fetch":
+        {
+            "type": 0,
+            "method": "POST",
+            "body": "searchkey={{key}}",
+            "url": "https://www.caimoge.com/search/"
+        },
+        "ruleSearch":
+        {
+            "list": "div#sitembox > dl",
+            "name": "dd > h3 > a@innerText",
+            "cover": "dt > a > img@src",
+            "url": "dd > h3 > a@href",
+            "intro": "dd.book_des@innerText",
+            "author": "dd.book_other > span:nth-child(1)@innerText",
+            "tocUrl": "dd > h3 > a@href",
+            "kind": "dd.book_other > span:nth-child(3)@innerText",
+            "words": "dd.book_other > span:nth-child(4)@innerText",
+            "lastChapter": "dd.book_other > a@innerText"
+        },
+        "ruleBookInfo":
+        {
+            "name": "meta[property='og:novel:book_name']@content",
+            "cover": "meta[property='og:image']@content",
+            "url": "meta[property='og:novel:read_url']@content",
+            "intro": "meta[property='og:description']@content",
+            "author": "meta[property='og:novel:author']@content",
+            "tocUrl": "meta[property='og:novel:read_url']@content",
+            "kind": "meta[property='og:novel:category']@content",
+            "words": "#bookinfo > div.bookright > div.count > ul > li:nth-child(4) > span@innerText",
+            "lastChapter": "meta[property='og:novel:latest_chapter_name']@content"
+        },
+        "ruleToc":
+        {
+            "list": "#readerlist > ul > li",
+            "title": "a@innerText",
+            "url": "a@href"
+        },
+        "ruleContent":
+        {
+            "content": "div#content@innerText",
+            "updateAt": "",
+            "words": "",
+            "tocUrl": "a#info_url@href"
+        },
+        "enabled": true
+    },
+    {
+        "name": "云中书库",
+        "url": "http://m.yunxs.com",
+        "icon": "https://m.yunxs.com/favicon.ico",
+        "fetch":
+        {
+            "type": 0,
+            "url": "http://m.yunxs.com/plus/search.php?s=00000&q={{key}}"
+        },
+        "ruleSearch":
+        {
+            "list": "div.so_list > div.bookbox",
+            "name": "div.bookinfo > h4.bookname > a@innerText",
+            "cover": "div.bookimg > a > img@src",
+            "url": "div.bookimg > a@href",
+            "intro": "",
+            "author": "div.bookinfo > div.author@innerText",
+            "tocUrl": "div.bookimg > a@href@list_{{page}}.html",
+            "kind": "div.bookinfo > div.cat@innerText",
+            "words": "",
+            "lastChapter": "div.bookinfo > div.update > a@innerText"
+        },
+        "ruleBookInfo":
+        {
+            "name": "div.book_info > div.book_box > dl > dt.name@innerText",
+            "cover": "div.book_info > div.cover > img@src",
+            "url": "",
+            "intro": "div.book_about > dl > dd@innerText",
+            "author": "div.book_info > div.book_box >dl > dd.dd_box > span@innerText",
+            "tocUrl": "",
+            "kind": "div.book_info > div.book_box >dl > dd.dd_box > span:nth-child(2)@innerText",
+            "words": "div.book_info > div.book_box > dl > dd:nth-child(3) > span:nth-child(2)@innerText",
+            "lastChapter": "div.book_info > div.book_box > dl > dd:nth-child(5) > span > a@innerText"
+        },
+        "ruleToc":
+        {
+            "list": "#div.book_last:nth-child(7) > dl > dd",
+            "title": "a@innerText",
+            "url": "a@href"
+        },
+        "ruleContent":
+        {
+            "content": "div#chaptercontent@innerText",
+            "updateAt": "",
+            "words": "",
+            "tocUrl": "a#pb_mulu@href",
+            "nextPage": "a#pb_next@href"
+        },
+        "enabled": true
+    },
+    {
+        "name": "笔趣阁 b5200",
+        "url": "http://www.b5200.net",
+        "icon": "https://www.b5200.net/favicon.ico",
+        "fetch":
+        {
+            "type": 0,
+            "url": "http://www.b5200.net/modules/article/search.php?searchkey={{key}}"
+        },
+        "ruleSearch":
+        {
+            "list": "table.grid > tbody > tr",
+            "name": "td:nth-child(1) > a@innerText",
+            "cover": "",
+            "url": "td:nth-child(1) > a@href",
+            "intro": "",
+            "author": "td:nth-child(3)@innerText",
+            "tocUrl": "td:nth-child(1) > a@href",
+            "kind": "",
+            "words": "td:nth-child(4)@innerText",
+            "lastChapter": "td:nth-child(2)@innerText"
+        },
+        "ruleBookInfo":
+        {
+            "name": "meta[property='og:novel:book_name']@content",
+            "cover": "meta[property='og:image']@content",
+            "url": "meta[property='og:novel:read_url']@content",
+            "intro": "meta[property='og:description']@content",
+            "author": "meta[property='og:novel:author']@content",
+            "tocUrl": "meta[property='og:novel:read_url']@content",
+            "kind": "meta[property='og:novel:category']@content",
+            "words": "#bookinfo > div.bookright > div.count > ul > li:nth-child(4) > span@innerText",
+            "lastChapter": "meta[property='og:novel:latest_chapter_name']@content"
+        },
+        "ruleToc":
+        {
+            "list": "div#list > dl > dd",
+            "title": "a@innerText",
+            "url": "a@href"
+        },
+        "ruleContent":
+        {
+            "content": "div#content@innerText",
+            "updateAt": "",
+            "words": "",
+            "tocUrl": "div.bottem1 > a:nth-child(4)@href"
+        },
+        "enabled": true
+    }
+]
