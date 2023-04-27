@@ -187,7 +187,7 @@
         },
         "ruleToc":
         {
-            "list": "#list > dl > dd",
+            "list": "div#list > dl > dd",
             "title": "a@innerText",
             "url": "a@href"
         },
@@ -357,12 +357,12 @@
     },
     {
         "name": "云中书库",
-        "url": "http://m.yunxs.com",
-        "icon": "https://m.yunxs.com/favicon.ico",
+        "url": "http://m.yunxs.info",
+        "icon": "https://m.yunxs.info/favicon.ico",
         "fetch":
         {
             "type": 0,
-            "url": "http://m.yunxs.com/plus/search.php?s=00000&q={{key}}"
+            "url": "http://m.yunxs.info/plus/search.php?s=00000&q={{key}}"
         },
         "ruleSearch":
         {
@@ -391,7 +391,7 @@
         },
         "ruleToc":
         {
-            "list": "#div.book_last:nth-child(7) > dl > dd",
+            "list": "div.book_last > dl > dd",
             "title": "a@innerText",
             "url": "a@href"
         },
