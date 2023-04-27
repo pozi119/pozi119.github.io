@@ -221,7 +221,7 @@
             "url": "td:nth-child(1) > a@href",
             "intro": "",
             "author": "td:nth-child(3)@innerText",
-            "tocUrl": "td:nth-child(1) > a@href@index_{{page}}.html",
+            "tocUrl": "td:nth-child(1) > a@href",
             "kind": "",
             "words": "td:nth-child(4)@innerText",
             "lastChapter": "td:nth-child(2)@innerText"
@@ -233,7 +233,7 @@
             "url": "meta[property='og:novel:read_url']@content",
             "intro": "meta[property='og:description']@content",
             "author": "meta[property='og:novel:author']@content",
-            "tocUrl": "meta[property='og:novel:read_url']@content@index_{{page}}.html",
+            "tocUrl": "meta[property='og:novel:read_url']@content",
             "kind": "meta[property='og:novel:category']@content",
             "words": "",
             "lastChapter": "meta[property='og:novel:latest_chapter_name']@content"
@@ -372,7 +372,7 @@
             "url": "div.bookimg > a@href",
             "intro": "",
             "author": "div.bookinfo > div.author@innerText",
-            "tocUrl": "div.bookimg > a@href@list_{{page}}.html",
+            "tocUrl": "div.bookimg > a@href",
             "kind": "div.bookinfo > div.cat@innerText",
             "words": "",
             "lastChapter": "div.bookinfo > div.update > a@innerText"
