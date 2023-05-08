@@ -453,5 +453,372 @@
             "tocUrl": "div.bottem1 > a:nth-child(4)@href"
         },
         "enabled": true
+    },
+    {
+        "name": "新笔趣阁(42zw)",
+        "icon": "http://m.42zw.la/images/favicon.ico",
+        "url": "http://m.42zw.la/",
+        "fetch":
+        {
+            "type": 0,
+            "url": "http://m.42zw.la/search?keyword={{key}}"
+        },
+        "ruleSearch":
+        {
+            "list": "div.hot_sale",
+            "name": "div.hot_sale > a@innerText",
+            "url": "div.hot_sale > a@href",
+            "author": "p.author > a:nth-child(2)@text",
+            "lastChapter": "p:nth-child(4) > a@text"
+        },
+        "ruleBookInfo":
+        {
+            "name": "meta[property='og:title']@content",
+            "cover": "meta[property='og:image']@content",
+            "url": "meta[property='og:url']@content",
+            "intro": "meta[property='og:description']@content",
+            "author": "meta[property='og:novel:author']@content",
+            "tocUrl": "div.recommend-info > h2:nth-child(3) > a@href",
+            "kind": "meta[property='og:novel:category']@content",
+            "lastChapter": "meta[property='og:novel:latest_chapter_name']@content"
+        },
+        "ruleToc":
+        {
+            "list": "div#chapterlist > p",
+            "title": "a@text",
+            "url": "a@href"
+        },
+        "ruleContent":
+        {
+            "content": "div#chaptercontent@innerText",
+            "tocUrl": "a#pb_mulu@href"
+        },
+        "enabled": true
+    },
+    {
+        "name": "笔趣阁(bbiquge)",
+        "icon": "https://m.bbiquge.cc/favicon.ico",
+        "url": "https://m.bbiquge.cc/",
+        "fetch":
+        {
+            "type": 0,
+            "url": ""
+        },
+        "ruleBookInfo":
+        {
+            "name": "meta[property='og:title']@content",
+            "cover": "meta[property='og:image']@content",
+            "url": "meta[property='og:url']@content",
+            "intro": "meta[property='og:description']@content",
+            "author": "meta[property='og:novel:author']@content",
+            "tocUrl": "div.lb_mulu > ul > li.more > a@href",
+            "kind": "meta[property='og:novel:category']@content",
+            "lastChapter": "meta[property='og:novel:latest_chapter_name']@content"
+        },
+        "ruleToc":
+        {
+            "list": "#alllist > div.lb_mulu > ul > li",
+            "title": "a@text",
+            "url": "a@href"
+        },
+        "ruleContent":
+        {
+            "content": "div#nr1@innerText",
+            "tocUrl": "a#pb_mulu@href"
+        },
+        "enabled": true
+    },
+    {
+        "name": "笔趣阁(bqg26)",
+        "icon": "https://www.bqg26.com/favicon.ico",
+        "url": "https://www.bqg26.com/",
+        "fetch":
+        {
+            "type": 0,
+            "url": "https://www.bqg26.com/modules/article/search.php?searchkey={{key}}"
+        },
+        "ruleSearch":
+        {
+            "list": "table.table > tbody > tr",
+            "name": "td:nth-child(2)@innerText",
+            "url": "td:nth-child(2) > a@href",
+            "author": "td:nth-child(4)@text",
+            "kind": "td:nth-child(1)@text",
+        },
+        "ruleBookInfo":
+        {
+            "name": "meta[property='og:title']@content",
+            "cover": "meta[property='og:image']@content",
+            "url": "meta[property='og:url']@content",
+            "intro": "meta[property='og:description']@content",
+            "author": "meta[property='og:novel:author']@content",
+            "tocUrl": "div.book_last > dl > dt > a@href",
+            "kind": "meta[property='og:novel:category']@content",
+            "lastChapter": "meta[property='og:novel:latest_chapter_name']@content"
+        },
+        "ruleToc":
+        {
+            "list": "dl.panel-chapterlist > dd",
+            "title": "a@text",
+            "url": "a@href"
+        },
+        "ruleContent":
+        {
+            "content": "div#htmlContent@innerText",
+            "tocUrl": "a#linkIndex@href"
+        },
+        "enabled": true
+    },
+    {
+        "name": "小说阅读网(feishuwx)",
+        "icon": "http://m.feishuwx.net/favicon.ico",
+        "url": "http://m.feishuwx.net/",
+        "fetch":
+        {
+            "type": 0,
+            "url": "http://m.feishuwx.net/article/search.php?searchkey={{key}}"
+        },
+        "ruleSearch":
+        {
+            "list": "div.read_book > div.block",
+            "name": "div.block_txt > h2@innerText",
+            "cover": "div.block_img > a >img@src",
+            "url": "div.block_img > a@href",
+            "author": "div.block_txt > p:nth-child(5)@text",
+            "kind": "div.block_txt > p:nth-child(4)@text",
+            "lastChapter": "div.block_txt > p:nth-child(6) > a@text"
+        },
+        "ruleBookInfo":
+        {
+            "name": "meta[property='og:title']@content",
+            "cover": "meta[property='og:image']@content",
+            "url": "meta[property='og:url']@content",
+            "intro": "meta[property='og:description']@content",
+            "author": "meta[property='og:novel:author']@content",
+            "tocUrl": "div.book_last > dl > dt > a@href",
+            "kind": "meta[property='og:novel:category']@content",
+            "lastChapter": "meta[property='og:novel:latest_chapter_name']@content"
+        },
+        "ruleToc":
+        {
+            "list": "ul.chapter > li",
+            "title": "a@text",
+            "url": "a@href"
+        },
+        "ruleContent":
+        {
+            "content": "#nr1@innerText",
+            "tocUrl": "a.pt_mulu@href"
+        },
+        "enabled": true
+    },
+    {
+        "name": "炫书网(ibiquta)",
+        "icon": "https://m.ibiquta.com/favicon.ico",
+        "url": "https://m.ibiquta.com/",
+        "fetch":
+        {
+            "type": 0,
+            "url": "https://m.ibiquta.com/search.html?searchkey={{key}}"
+        },
+        "ruleSearch":
+        {
+            "list": "div.waps_one",
+            "name": "div.isfull > span.waps_name@innerText",
+            "url": "div.isfull > span.waps_name > a@href",
+            "author": "div.genxin > a@text",
+            "kind": "div.fenlei@text"
+        },
+        "ruleBookInfo":
+        {
+            "name": "div.caption > p@innerText",
+            "cover": "div.cover > img@src",
+            "intro": "div.box > p@innerText",
+            "author": "div.detail > p:nth-child(1)@innerText",
+            "tocUrl": "div.mod > div.button > a@href",
+            "kind": "div.detail > p:nth-child(2)@innerText",
+            "words": "div.detail > p:nth-child(4)@innerText"
+        },
+        "ruleToc":
+        {
+            "list": "ul#readlist>li",
+            "title": "a@text",
+            "url": "a@href"
+        },
+        "ruleContent":
+        {
+            "content": "div#content@innerText",
+            "tocUrl": "#pager_top > tbody > tr > td:nth-child(2) > a@href"
+        },
+        "enabled": true
+    },
+    {
+        "name": "梦书中文(mcmssc)",
+        "icon": "about:blank",
+        "url": "https://www.mcmssc.net/",
+        "fetch":
+        {
+            "type": 0,
+            "url": "https://www.mcmssc.net/search.html?name={{key}}"
+        },
+        "ruleSearch":
+        {
+            "list": "div.novelslist2 > ul > li",
+            "name": "span.s2.wid@innerText",
+            "url": "span.s2.wid > a@href",
+            "author": "span.s4.wid@text",
+            "lastChapter": "span.s3.wid3@text"
+        },
+        "ruleBookInfo":
+        {
+            "name": "meta[property='og:title']@content",
+            "cover": "meta[property='og:image']@content",
+            "url": "meta[property='og:url']@content",
+            "intro": "meta[property='og:description']@content",
+            "author": "meta[property='og:novel:author']@content",
+            "kind": "meta[property='og:novel:category']@content",
+            "lastChapter": "meta[property='og:novel:latest_chapter_name']@content"
+        },
+        "ruleToc":
+        {
+            "list": "div#list > dl > dd",
+            "title": "a@text",
+            "url": "a@href"
+        },
+        "ruleContent":
+        {
+            "content": "div#chaptercontent@innerText",
+            "tocUrl": "a#pt_mulu@href"
+        },
+        "enabled": true
+    },
+    {
+        "name": "偶然中文(or7)",
+        "icon": "about:blank",
+        "url": "https://m.or7.net/",
+        "fetch":
+        {
+            "type": 0,
+            "url": "https://m.or7.net/sscc/",
+            "method": "POST",
+            "body": "act=959a6de8c86ed430&q={{key}}&submit=快速搜书"
+        },
+        "ruleSearch":
+        {
+            "list": "dl.B",
+            "name": "dt@innerText",
+            "cover": "dd.imgB > a > img@src",
+            "url": "dd.imgB > a@href",
+            "intro": "dd.d2@text",
+            "author": "dd > span@text",
+            "lastChapter": "dd:nth-child(5)@text"
+        },
+        "ruleBookInfo":
+        {
+            "name": "meta[property='og:title']@content",
+            "cover": "meta[property='og:image']@content",
+            "url": "meta[property='og:url']@content",
+            "intro": "meta[property='og:description']@content",
+            "author": "meta[property='og:novel:author']@content",
+            "tocUrl": "div.book_last > dl > dt > a@href",
+            "kind": "meta[property='og:novel:category']@content",
+            "lastChapter": "meta[property='og:novel:latest_chapter_name']@content"
+        },
+        "ruleToc":
+        {
+            "list": "ul.MLlist > li",
+            "title": "a@text",
+            "url": "a@href"
+        },
+        "ruleContent":
+        {
+            "content": "div.TxtContent@innerText",
+            "tocUrl": "div.VolumeNext > span.m@href"
+        },
+        "enabled": true
+    },
+    {
+        "name": "笔趣阁(twxs8)",
+        "icon": "about:blank",
+        "url": "http://wap.twxs8.com/",
+        "fetch":
+        {
+            "type": 0,
+            "url": "http://wap.twxs8.com/search?keyword={{key}}"
+        },
+        "ruleSearch":
+        {
+            "list": "div.bookbox",
+            "name": "h4.bookname@innerText",
+            "cover": "div.bookimg > a > img@src",
+            "url": "div.bookimg > a@href",
+            "author": "div.author@text",
+            "kind": "div.cat@text",
+            "lastChapter": "div.update > a@text"
+        },
+        "ruleBookInfo":
+        {
+            "name": "meta[property='og:title']@content",
+            "cover": "meta[property='og:image']@content",
+            "url": "meta[property='og:url']@content",
+            "intro": "meta[property='og:description']@content",
+            "author": "meta[property='og:novel:author']@content",
+            "tocUrl": "div.book_last > dl > dt > a@href",
+            "kind": "meta[property='og:novel:category']@content",
+            "lastChapter": "meta[property='og:novel:latest_chapter_name']@content"
+        },
+        "ruleToc":
+        {
+            "list": "div.book_last > dl > dd",
+            "title": "a@text",
+            "url": "a@href"
+        },
+        "ruleContent":
+        {
+            "content": "#chaptercontent@innerText",
+            "tocUrl": "a#pb_mulu@href"
+        },
+        "enabled": true
+    },
+    {
+        "name": "笔趣阁(xxbiqudu)",
+        "icon": "https://m.xxbiqudu.com/favicon.ico",
+        "url": "https://m.xxbiqudu.com/",
+        "fetch":
+        {
+            "type": 0,
+            "url": "https://m.xxbiqudu.com/s.php?keyword={{key}}"
+        },
+        "ruleSearch":
+        {
+            "list": "div.cover > p.line",
+            "name": "a:nth-child(2)@innerText",
+            "url": "a:nth-child(2)@href",
+            "author": "a:nth-child(3)@text",
+            "kind": "a:nth-child(1)@text",
+        },
+        "ruleBookInfo":
+        {
+            "name": "div.block_txt2 > h2@text",
+            "cover": "div.block_img2 > img@src",
+            "url": "meta[property='og:url']@content",
+            "intro": "div.intro_info@text",
+            "author": "div.block_txt2 > p:nth-child(4) > a@text",
+            "tocUrl": "div.ablum_read > span:nth-child(2) > a@href",
+            "kind": "div.block_txt2 > p:nth-child(5) > a@text",
+            "lastChapter": "div.block_txt2 > p:nth-child(8) > a@text"
+        },
+        "ruleToc":
+        {
+            "list": "ul.chapter > li",
+            "title": "a@text",
+            "url": "a@href"
+        },
+        "ruleContent":
+        {
+            "content": "#content > div.text@innerText",
+            "tocUrl": "#btop-info > div.nav > span.lf > span:nth-child(2) > a@href"
+        },
+        "enabled": true
     }
 ]
